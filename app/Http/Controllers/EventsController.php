@@ -15,6 +15,12 @@ class EventsController extends BaseController
         throw new \Exception('implement in coding task 1');
     }
 
+    public function getWarmUpEvents() {
+        $jsonVal = '{ "name" : "Laravel convention 2020", "name" : "Laravel convention 2021", "name" : "React convention 2021"}';
+        
+        return response()->json(json_decode($jsonVal));
+    }
+
     public function getFutureEventsWithWorkshops() {
         throw new \Exception('implement in coding task 2');
     }

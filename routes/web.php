@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('/warmupevents', [EventsController::class, 'getWarmUpEvents']);
 Route::get('/events', [EventsController::class, 'getEventsWithWorkshops']);
 Route::get('/futureevents', [EventsController::class, 'getFutureEventsWithWorkshops']);
 Route::get('/menu', [MenuController::class, 'getMenuItems']);
