@@ -15,14 +15,20 @@ class EventsController extends BaseController
 {
     public function getEventsWithWorkshops() {
         // throw new \Exception('implement in coding task 1');
-        $workshops = DB::table('workshops')
-                   ->select('*')
-                   ->groupBy('event_id');
-        $users = DB::table('events')
-        ->joinSub($workshops, 'workshops', function ($join) {
-            $join->on('events.id', '=', 'workshops.event_id');
-        })->get();
-        return response()->json(json_decode($users));
+        $events = DB::table('events')
+                   ->select('*')->get();
+        $finalReturnValue = [];
+        if(count($events) > 0){
+            foreach($events as $event){
+                $workshops = DB::table('workshops')
+                ->select('*')
+                ->where('event_id', $event->id)
+                ->get();
+                $event->workshops = $workshops;
+                array_push($finalReturnValue, $event);
+            }
+        }
+        return response()->json($finalReturnValue);
     }
 
     public function getWarmUpEvents() {
